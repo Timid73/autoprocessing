@@ -4,12 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jdom.Document;
 import org.springframework.stereotype.Service;
-import ru.evrika.pfr.autoprocessing.config.FileProperty;
 import ru.evrika.pfr.autoprocessing.core.model.PackageInfo;
 import ru.evrika.pfr.autoprocessing.core.service.ArchiveManager;
-import ru.evrika.pfr.autoprocessing.core.service.EmailService;
 import ru.evrika.pfr.autoprocessing.core.service.PackageService;
-import ru.evrika.pfr.autoprocessing.file.FileService;
+import ru.evrika.pfr.autoprocessing.core.usecase.worker.WorkerFactory;
 import ru.evrika.pfr.autoprocessing.file.XmlService;
 import ru.evrika.pfr.autoprocessing.file.ZipBuilder;
 
@@ -21,11 +19,11 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class UseCase {
+public class PackageUseCase {
 
     private final String DESCRIPTION = "packageDescription.xml";
 
-    private final String FILE_NAME_PATTERN = "*083*";
+    private final String SIGN = "packageDescription.sign";
 
     private final XmlService xmlService;
 
@@ -33,22 +31,21 @@ public class UseCase {
 
     private final ArchiveManager archiveManager;
 
-    private final EmailService emailService;
 
-    private final FileService fileService;
+    private final WorkerFactory workerFactory;
 
-    private final FileProperty fileProperty;
+    public void process(List<String> files) {
 
-    public void processFiles(String incomingPathName) {
-        List<String> files = fileService.findAllFiles(incomingPathName, fileProperty.getMaskPattern());
+        files.forEach(this::processFile);
     }
 
     private void processFile(String fileName) {
         ZipBuilder zipBuilder = new ZipBuilder(fileName);
         Document xmlDocument = xmlService.loadXml(zipBuilder.unzipFile(DESCRIPTION));
         PackageInfo packageInfo = packageService.parseXml(xmlDocument);
+        packageInfo.setFileName(fileName);
         packageService.save(packageInfo);
-        emailService.createMessage(packageInfo);
+        workerFactory.getWorker(packageInfo.getType().getType()).execute(packageInfo);
         archiveManager.archiving(fileName);
     }
 }

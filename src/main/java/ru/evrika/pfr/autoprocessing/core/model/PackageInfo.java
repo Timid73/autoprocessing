@@ -1,6 +1,7 @@
 package ru.evrika.pfr.autoprocessing.core.model;
 
 import lombok.Data;
+import ru.evrika.pfr.autoprocessing.core.enums.TransactionType;
 
 import java.time.LocalDateTime;
 
@@ -10,15 +11,17 @@ import java.time.LocalDateTime;
 @Data
 public class PackageInfo {
 
-    private String sender;
+    private String uid;
 
-    private String recipient;
+    private String regNumFrom;
+
+    private String regNumTo;
 
     private LocalDateTime date;
 
-    private String type;
+    private TransactionType type;
 
     private boolean positive;
 
-    private String file;
+    private String fileName;
 }

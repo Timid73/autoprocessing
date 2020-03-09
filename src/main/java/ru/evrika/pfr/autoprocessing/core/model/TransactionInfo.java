@@ -12,6 +12,8 @@ public class TransactionInfo {
 
     private String type;
 
+    private String mailBox;
+
     private PackageInfo pension;
 
     private PackageInfo reSign;

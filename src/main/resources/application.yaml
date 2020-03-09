@@ -1,7 +1,10 @@
 file:
   maskPattern: "083"
 path:
-  incoming: ""
-  vipnet: ""
-  dipost: ""
-  archive: ""
+  incoming: D:/pfr/incoming
+  vipnet: D:/pfr/vipnet
+  dipost: D:/pfr/out
+  archive: D:/pfr/archive
+email:
+  bti: pfr_ul@evrika-otchet.ru
+  monitor: pfr_monitor@evrika-otchet.ru

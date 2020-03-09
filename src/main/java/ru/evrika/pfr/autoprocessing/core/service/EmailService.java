@@ -7,5 +7,5 @@ import ru.evrika.pfr.autoprocessing.core.model.PackageInfo;
  */
 public interface EmailService {
 
-    void sendPackageInfo(PackageInfo packageInfo);
+    void createMessage(PackageInfo packageInfo);
 }

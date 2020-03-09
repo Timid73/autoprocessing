@@ -1,6 +1,5 @@
 package ru.evrika.pfr.autoprocessing.file;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -12,7 +11,9 @@ public interface FileService {
 
     List<String> findAllFiles(String pathName, String maskPattern);
 
-    boolean move(File file, String targetPath);
+    boolean move(String fileName, String targetPath);
 
-    boolean copy(File file, String targetPath);
+    boolean copy(String fileName, String targetPath);
+
+    boolean create(String content, String fileName);
 }
