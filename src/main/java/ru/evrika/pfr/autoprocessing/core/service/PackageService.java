@@ -1,6 +1,6 @@
 package ru.evrika.pfr.autoprocessing.core.service;
 
-import org.jdom.Document;
+import org.w3c.dom.Document;
 import ru.evrika.pfr.autoprocessing.core.model.PackageInfo;
 
 /**

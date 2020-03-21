@@ -2,6 +2,8 @@ package ru.evrika.pfr.autoprocessing.core.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * Created by Timid on 21.12.2015.
  */
@@ -14,9 +16,5 @@ public class TransactionInfo {
 
     private String mailBox;
 
-    private PackageInfo pension;
-
-    private PackageInfo reSign;
-
-    private PackageInfo protocol;
+    private List<PackageInfo> packageInfoList;
 }

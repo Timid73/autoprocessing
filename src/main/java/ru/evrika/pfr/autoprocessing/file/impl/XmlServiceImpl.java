@@ -1,16 +1,17 @@
 package ru.evrika.pfr.autoprocessing.file.impl;
 
-import com.google.common.io.CharStreams;
 import lombok.extern.slf4j.Slf4j;
-import org.jdom.Document;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import ru.evrika.pfr.autoprocessing.file.XmlService;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringReader;
 
 /**
@@ -21,18 +22,17 @@ import java.io.StringReader;
 public class XmlServiceImpl implements XmlService {
 
     @Override
-    public Document loadXml(InputStream inputStream) {
-        if (inputStream == null) {
-            throw new RuntimeException();
-        }
+    public Document loadXml(@NonNull String content) {
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder;
         try {
-            String content = CharStreams.toString(new InputStreamReader(inputStream, "windows-1251"));
-            inputStream.close();
-            SAXBuilder saxBuilder = new SAXBuilder();
-            return saxBuilder.build(new StringReader(content));
-        } catch (IOException e) {
+            docBuilder = docBuilderFactory.newDocumentBuilder();
+            return docBuilder.parse(new InputSource(new StringReader(content)));
+        } catch (ParserConfigurationException e) {
             throw new RuntimeException();
-        } catch (JDOMException e) {
+        } catch (SAXException e) {
+            throw new RuntimeException();
+        } catch (IOException e) {
             throw new RuntimeException();
         }
     }

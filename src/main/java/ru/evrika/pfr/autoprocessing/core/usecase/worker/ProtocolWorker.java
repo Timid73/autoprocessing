@@ -23,7 +23,7 @@ public class ProtocolWorker implements PackageWorker {
     @Override
     public void execute(PackageInfo packageInfo) {
         TransactionInfo transactionInfo = transactionService.find(packageInfo.getUid());
-        transactionInfo.setProtocol(packageInfo);
+        transactionInfo.getPackageInfoList().add(packageInfo);
         transactionService.save(transactionInfo);
         emailService.createMessage(packageInfo);
     }

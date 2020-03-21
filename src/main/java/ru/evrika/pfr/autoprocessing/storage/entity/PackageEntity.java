@@ -1,6 +1,7 @@
 package ru.evrika.pfr.autoprocessing.storage.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,6 +13,7 @@ import java.sql.Timestamp;
 @Entity
 @Data
 @Table(name = "package")
+@EqualsAndHashCode(callSuper = true)
 public class PackageEntity extends BaseEntity {
 
     private String sender;

@@ -29,7 +29,7 @@ public class ReSignWorker implements PackageWorker {
     @Override
     public void execute(PackageInfo packageInfo) {
         TransactionInfo transactionInfo = transactionService.find(packageInfo.getUid());
-        transactionInfo.setReSign(packageInfo);
+        transactionInfo.getPackageInfoList().add(packageInfo);
         transactionService.save(transactionInfo);
         if (packageInfo.getRegNumFrom().length() < 10) { //TODO wtf 10???
             emailService.createMessage(packageInfo);

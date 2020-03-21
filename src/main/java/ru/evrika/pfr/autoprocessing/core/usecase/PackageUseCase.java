@@ -2,14 +2,14 @@ package ru.evrika.pfr.autoprocessing.core.usecase;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jdom.Document;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.Document;
 import ru.evrika.pfr.autoprocessing.core.model.PackageInfo;
 import ru.evrika.pfr.autoprocessing.core.service.ArchiveManager;
 import ru.evrika.pfr.autoprocessing.core.service.PackageService;
 import ru.evrika.pfr.autoprocessing.core.usecase.worker.WorkerFactory;
 import ru.evrika.pfr.autoprocessing.file.XmlService;
-import ru.evrika.pfr.autoprocessing.file.ZipBuilder;
+import ru.evrika.pfr.autoprocessing.file.ZipManager;
 
 import java.util.List;
 
@@ -40,8 +40,8 @@ public class PackageUseCase {
     }
 
     private void processFile(String fileName) {
-        ZipBuilder zipBuilder = new ZipBuilder(fileName);
-        Document xmlDocument = xmlService.loadXml(zipBuilder.unzipFile(DESCRIPTION));
+        ZipManager zipManager = new ZipManager(fileName);
+        Document xmlDocument = xmlService.loadXml(zipManager.getUnzipFileContent(DESCRIPTION, "windows-1251"));
         PackageInfo packageInfo = packageService.parseXml(xmlDocument);
         packageInfo.setFileName(fileName);
         packageService.save(packageInfo);
