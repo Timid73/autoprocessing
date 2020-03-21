@@ -1,7 +1,9 @@
 package ru.evrika.pfr.autoprocessing.core.service.impl;
 
+import org.jdom2.Document;
+import org.jdom2.Element;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
+import ru.evrika.pfr.autoprocessing.core.enums.TransactionType;
 import ru.evrika.pfr.autoprocessing.core.model.PackageInfo;
 import ru.evrika.pfr.autoprocessing.core.service.PackageService;
 
@@ -21,10 +23,10 @@ public class PackageServiceImpl implements PackageService {
     public PackageInfo parseXml(Document xml) {
         PackageInfo packageInfo = new PackageInfo();
         packageInfo.setDate(LocalDateTime.now());
-/*        packageInfo.setUid(xml.getRootElement().getChild("пакет").getAttributeValue("идентификаторДокументооборота"));
-        packageInfo.setRegNumFrom(xml.getRootElement().getChild("пакет").getChild("отправитель").getAttributeValue("идентификаторСубъекта"));
-        packageInfo.setRegNumTo(xml.getRootElement().getChild("пакет").getChild("получатель").getAttributeValue("идентификаторСубъекта"));
-        packageInfo.setType(TransactionType.of(xml.getRootElement().getChild("пакет").getAttributeValue("типТранзакции")));*/
+        packageInfo.setUid(xml.getRootElement().getAttributeValue("идентификаторДокументооборота"));
+        packageInfo.setRegNumFrom(xml.getRootElement().getChild("отправитель").getAttributeValue("идентификаторСубъекта"));
+        packageInfo.setRegNumTo(xml.getRootElement().getChild("получатель").getAttributeValue("идентификаторСубъекта"));
+        packageInfo.setType(TransactionType.of(xml.getRootElement().getAttributeValue("типТранзакции")));
         packageInfo.setPositive(isProtocolPositive(xml));
         return packageInfo;
     }
@@ -35,9 +37,9 @@ public class PackageServiceImpl implements PackageService {
     }
 
     private boolean isProtocolPositive(Document xml) {
-/*        for (Object element: xml.getRootElement().getChild("пакет").getChildren("документ")) {
+        for (Object element: xml.getRootElement().getChildren("документ")) {
             return PROTOCOL_TYPES.contains(((Element)element).getAttributeValue("типДокумента"));
-        }*/
+        }
         return false;
     }
 }

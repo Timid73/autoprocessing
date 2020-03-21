@@ -1,6 +1,6 @@
 package ru.evrika.pfr.autoprocessing.file;
 
-import org.w3c.dom.Document;
+import org.jdom2.Document;
 
 /**
  * Created by Sergei Balashov on 07.03.2020.

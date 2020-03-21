@@ -2,8 +2,8 @@ package ru.evrika.pfr.autoprocessing.core.usecase;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jdom2.Document;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
 import ru.evrika.pfr.autoprocessing.core.model.PackageInfo;
 import ru.evrika.pfr.autoprocessing.core.service.ArchiveManager;
 import ru.evrika.pfr.autoprocessing.core.service.PackageService;
