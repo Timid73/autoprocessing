@@ -1,12 +1,10 @@
-package ru.evrika.pfr.autoprocessing.core.service.impl;
+package ru.evrika.pfr.autoprocessing.core.service.mail;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.evrika.pfr.autoprocessing.config.EmailProperty;
 import ru.evrika.pfr.autoprocessing.config.PathProperty;
 import ru.evrika.pfr.autoprocessing.core.model.PackageInfo;
-import ru.evrika.pfr.autoprocessing.core.service.EmailService;
-import ru.evrika.pfr.autoprocessing.core.service.MailBuilder;
 import ru.evrika.pfr.autoprocessing.file.FileService;
 import ru.evrika.pfr.autoprocessing.storage.data.EmailDataProvider;
 

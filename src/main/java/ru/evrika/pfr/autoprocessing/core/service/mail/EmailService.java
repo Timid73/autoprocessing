@@ -1,4 +1,4 @@
-package ru.evrika.pfr.autoprocessing.core.service;
+package ru.evrika.pfr.autoprocessing.core.service.mail;
 
 import ru.evrika.pfr.autoprocessing.core.model.PackageInfo;
 

@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * Created by Sergei Balashov on 08.03.2020.
+ * Тип транзакции
  */
 @Getter
 @AllArgsConstructor

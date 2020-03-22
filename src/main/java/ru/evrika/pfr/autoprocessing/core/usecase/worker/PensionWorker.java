@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import ru.evrika.pfr.autoprocessing.config.PathProperty;
 import ru.evrika.pfr.autoprocessing.core.model.PackageInfo;
 import ru.evrika.pfr.autoprocessing.core.model.TransactionInfo;
-import ru.evrika.pfr.autoprocessing.core.service.EmailService;
-import ru.evrika.pfr.autoprocessing.core.service.TransactionService;
+import ru.evrika.pfr.autoprocessing.core.service.mail.EmailService;
+import ru.evrika.pfr.autoprocessing.core.service.transaction.TransactionService;
 import ru.evrika.pfr.autoprocessing.file.FileService;
 
 /**

@@ -1,9 +1,16 @@
 package ru.evrika.pfr.autoprocessing.core.enums;
 
 /**
- * Created by Sergei Balashov on 06.03.2020.
+ * Тип организации
  */
 public enum OrganizationType {
+    /**
+     * Плательщик
+     */
     PAYER,
+
+    /**
+     * Пенсионный фонд
+     */
     PFR
 }

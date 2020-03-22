@@ -2,14 +2,11 @@ package ru.evrika.pfr.autoprocessing.core.usecase;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jdom2.Document;
 import org.springframework.stereotype.Service;
 import ru.evrika.pfr.autoprocessing.core.model.PackageInfo;
 import ru.evrika.pfr.autoprocessing.core.service.ArchiveManager;
-import ru.evrika.pfr.autoprocessing.core.service.PackageService;
+import ru.evrika.pfr.autoprocessing.core.usecase.info.PackageCreator;
 import ru.evrika.pfr.autoprocessing.core.usecase.worker.WorkerFactory;
-import ru.evrika.pfr.autoprocessing.file.XmlService;
-import ru.evrika.pfr.autoprocessing.file.ZipManager;
 
 import java.util.List;
 
@@ -19,18 +16,11 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class PackageUseCase {
+public class FileProcessor {
 
-    private final String DESCRIPTION = "packageDescription.xml";
-
-    private final String SIGN = "packageDescription.sign";
-
-    private final XmlService xmlService;
-
-    private final PackageService packageService;
+    private final PackageCreator<String> packageCreator;
 
     private final ArchiveManager archiveManager;
-
 
     private final WorkerFactory workerFactory;
 
@@ -40,11 +30,9 @@ public class PackageUseCase {
     }
 
     private void processFile(String fileName) {
-        ZipManager zipManager = new ZipManager(fileName);
-        Document xmlDocument = xmlService.loadXml(zipManager.getUnzipFileContent(DESCRIPTION, "windows-1251"));
-        PackageInfo packageInfo = packageService.parseXml(xmlDocument);
+        PackageInfo packageInfo = packageCreator.createFromSource(fileName);
         packageInfo.setFileName(fileName);
-        packageService.save(packageInfo);
+        packageCreator.save(packageInfo);
         workerFactory.getWorker(packageInfo.getType().getType()).execute(packageInfo);
         archiveManager.archiving(fileName);
     }

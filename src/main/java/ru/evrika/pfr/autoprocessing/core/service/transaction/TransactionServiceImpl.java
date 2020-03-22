@@ -1,8 +1,7 @@
-package ru.evrika.pfr.autoprocessing.core.service.impl;
+package ru.evrika.pfr.autoprocessing.core.service.transaction;
 
 import ru.evrika.pfr.autoprocessing.core.model.PackageInfo;
 import ru.evrika.pfr.autoprocessing.core.model.TransactionInfo;
-import ru.evrika.pfr.autoprocessing.core.service.TransactionService;
 
 /**
  * Created by Sergei Balashov on 07.03.2020.

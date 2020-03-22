@@ -6,22 +6,43 @@ import ru.evrika.pfr.autoprocessing.core.enums.TransactionType;
 import java.time.LocalDateTime;
 
 /**
- * Created by Timid on 12.12.2015.
+ * Информация пакета
  */
 @Data
 public class PackageInfo {
 
+    /**
+     * Уникальный идентификатор
+     */
     private String uid;
 
+    /**
+     * Регистрационный номер отправителя
+     */
     private String regNumFrom;
 
+    /**
+     * Регистрационный номер получателя
+     */
     private String regNumTo;
 
+    /**
+     * Дата пакета
+     */
     private LocalDateTime date;
 
+    /**
+     * Тип транзакции
+     */
     private TransactionType type;
 
+    /**
+     * Флаг позитивного результата
+     */
     private boolean positive;
 
+    /**
+     * имя файла
+     */
     private String fileName;
 }

@@ -1,10 +1,10 @@
-package ru.evrika.pfr.autoprocessing.core.service.impl;
+package ru.evrika.pfr.autoprocessing.core.usecase.info;
 
 import org.jdom2.Document;
 import org.junit.jupiter.api.Test;
 import ru.evrika.pfr.autoprocessing.core.enums.TransactionType;
 import ru.evrika.pfr.autoprocessing.core.model.PackageInfo;
-import ru.evrika.pfr.autoprocessing.core.service.PackageService;
+import ru.evrika.pfr.autoprocessing.core.usecase.source.XmlParser;
 import ru.evrika.pfr.autoprocessing.file.XmlService;
 import ru.evrika.pfr.autoprocessing.file.impl.XmlServiceImpl;
 
@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Created by Sergei Balashov on 21.03.2020.
  */
-class PackageServiceImplTest {
+class XmlParserTest {
 
     private final static String XML_TEXT = "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n" +
             "<пакет типТранзакции=\"ДокументПФР\" типДокументооборота=\"ДокументПФР\" идентификаторДокументооборота=\"341d4d17b7b97189760be899fbf43383\" версияФормата=\"ПФР:2.0\">\n" +
@@ -37,10 +37,10 @@ class PackageServiceImplTest {
 
     @Test
     void parseXml() {
-        PackageService packageService = new PackageServiceImpl();
+
         XmlService xmlService = new XmlServiceImpl();
         Document document = xmlService.loadXml(XML_TEXT);
-        PackageInfo packageInfo = packageService.parseXml(document);
+        PackageInfo packageInfo = XmlParser.parseDocument(document);
         assertEquals("341d4d17b7b97189760be899fbf43383", packageInfo.getUid());
         assertEquals("083-028-000000", packageInfo.getRegNumFrom());
         assertEquals(TransactionType.unknown, packageInfo.getType());

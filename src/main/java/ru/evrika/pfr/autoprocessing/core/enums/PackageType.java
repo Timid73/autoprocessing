@@ -1,7 +1,7 @@
 package ru.evrika.pfr.autoprocessing.core.enums;
 
 /**
- * Created by Sergei Balashov on 08.03.2020.
+ * Тип пакета
  */
 public enum PackageType {
 

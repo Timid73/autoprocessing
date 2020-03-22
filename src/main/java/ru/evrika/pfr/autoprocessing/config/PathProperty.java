@@ -5,7 +5,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created by Sergei Balashov on 07.03.2020.
+ * Конфигурация для дирикторий приложений
+ * incoming - директория для входящих файлов для обработки
+ * vipnet - директория для исходящих файлов для vipnet БТИ
+ * dipost - директория для писем в Дипост
+ * archive - директория для хранения архивов
  */
 @Data
 @Configuration

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import ru.evrika.pfr.autoprocessing.config.FileProperty;
-import ru.evrika.pfr.autoprocessing.core.usecase.PackageUseCase;
+import ru.evrika.pfr.autoprocessing.core.usecase.FileProcessor;
 import ru.evrika.pfr.autoprocessing.file.FileService;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class ScheduledTasks {
     @Value("${path.incoming}")
     private String incomingPathName;
 
-    private final PackageUseCase packageUseCase;
+    private final FileProcessor fileProcessor;
 
     private final FileService fileService;
 
@@ -32,6 +32,6 @@ public class ScheduledTasks {
     protected void executeInternal() {
 
         List<String> files = fileService.findAllFiles(incomingPathName, fileProperty.getMaskPattern());
-        packageUseCase.process(files);
+        fileProcessor.process(files);
     }
 }
